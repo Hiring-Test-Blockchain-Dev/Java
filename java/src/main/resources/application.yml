@@ -1,0 +1,36 @@
+server:
+  port: ${PORT:3001}
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+      schema-locations: classpath:schema.sql
+
+verifi:
+  jwt-secret: ${JWT_SECRET:${JWT_ACCESS_SECRET:dev-secret-change-in-production}}
+  jwt-expires-in: ${JWT_EXPIRES_IN:${JWT_ACCESS_EXPIRY:15m}}
+  cors-origin: ${CORS_ORIGIN:http://localhost:5173}
+  production: ${VERIFI_PRODUCTION:false}
+  api-rate-limit-max: 200
+  auth-rate-limit-max: ${AUTH_RATE_LIMIT_MAX:30}
+  nonce-rate-limit-max: ${NONCE_RATE_LIMIT_MAX:40}
+  coach-rate-limit-max: 40
+  openai-api-key: ${OPENAI_API_KEY:}
+  plaid-client-id: ${PLAID_CLIENT_ID:}
+  plaid-secret: ${PLAID_SECRET:}
+  plaid-env: ${PLAID_ENV:sandbox}
+  kyc-auto-approve: ${KYC_AUTO_APPROVE:true}
+  datasource-url: ${VERIFI_DATASOURCE_URL:}
